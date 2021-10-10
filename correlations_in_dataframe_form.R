@@ -13,9 +13,14 @@ mosthighlycorrelated <- function(mydataframe,numtoreport=choose(n = ncol(mydataf
   # sort and print the top n correlations
   head(fm[order(abs(fm$Correlation),decreasing=T),],n=numtoreport)
 }
-mosthighlycorrelated(mtcars, 10)
+mosthighlycorrelated(mtcars, numtoreport = 10)
 
-dfnum <- df[sapply(df,is.numeric)] # takes only numeric values
+dfnum <- iris[sapply(iris,is.numeric)] # takes only numeric variables
+mosthighlycorrelated(dfnum) # gives all possible combination's correlation coefficients
 
-library(GGally)
-ggpairs(mtcars, aes(colour = as.character(am), alpha = 0.4))
+# install and load GGally package for nice graphics
+if(!require(GGally, quietly = T)){
+  install.packages("GGally", quiet = T)
+  require(GGally, quietly = T)
+}
+ggpairs(iris, aes(colour = as.character(Species), alpha = 0.4))
