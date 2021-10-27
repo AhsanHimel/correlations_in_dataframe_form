@@ -1,4 +1,4 @@
-mosthighlycorrelated <- function(mydataframe,numtoreport=choose(n = ncol(mydataframe), k =2))
+MostHighlyCorrelated <- function(mydataframe,numtoreport=choose(n = ncol(mydataframe), k =2))
 {
   dfnum <- mydataframe[sapply(mydataframe,is.numeric)] # takes only numeric variables
   # find the correlations
@@ -14,13 +14,12 @@ mosthighlycorrelated <- function(mydataframe,numtoreport=choose(n = ncol(mydataf
   # sort and print the top n correlations
   head(fm[order(abs(fm$Correlation),decreasing=T),],n=numtoreport)
 }
-mosthighlycorrelated(mtcars, numtoreport = 10)
-mosthighlycorrelated(iris, numtoreport = 10)
+MostHighlyCorrelated(mtcars, numtoreport = 10)
+MostHighlyCorrelated(iris, numtoreport = 10)
 
 dfnum <- iris[sapply(iris,is.numeric)] # takes only numeric variables
-mosthighlycorrelated(iris) # gives all possible combination's correlation coefficients
-
 # install and load GGally package for nice graphics
+
 if(!require(GGally, quietly = T)){
   install.packages("GGally", quiet = T)
   require(GGally, quietly = T)
