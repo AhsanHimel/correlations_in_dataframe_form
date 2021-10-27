@@ -1,7 +1,8 @@
 mosthighlycorrelated <- function(mydataframe,numtoreport=choose(n = ncol(mydataframe), k =2))
 {
+  dfnum <- mydataframe[sapply(mydataframe,is.numeric)] # takes only numeric variables
   # find the correlations
-  cormatrix <- cor(mydataframe, use = "pairwise.complete.obs")
+  cormatrix <- cor(dfnum, use = "pairwise.complete.obs")
   # set the correlations on the diagonal or lower triangle to zero,
   # so they will not be reported as the highest ones:
   diag(cormatrix) <- 0
@@ -14,9 +15,10 @@ mosthighlycorrelated <- function(mydataframe,numtoreport=choose(n = ncol(mydataf
   head(fm[order(abs(fm$Correlation),decreasing=T),],n=numtoreport)
 }
 mosthighlycorrelated(mtcars, numtoreport = 10)
+mosthighlycorrelated(iris, numtoreport = 10)
 
 dfnum <- iris[sapply(iris,is.numeric)] # takes only numeric variables
-mosthighlycorrelated(dfnum) # gives all possible combination's correlation coefficients
+mosthighlycorrelated(iris) # gives all possible combination's correlation coefficients
 
 # install and load GGally package for nice graphics
 if(!require(GGally, quietly = T)){
